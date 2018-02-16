@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Header from '../header/Header'
 import Welcome from '../welcome/Welcome'
+import Snippets from '../snippets/Snippets'
 import NotFound from '../404/NotFound'
 
 export default () => {
@@ -10,6 +11,7 @@ export default () => {
       <div>
         <Header />
         <Switch>
+          <Route exact path="/snippets" component={Snippets} />
           <Route exact path="/" component={Welcome} />
           <Route component={NotFound} />
         </Switch>
