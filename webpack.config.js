@@ -1,22 +1,22 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // set up sass extractor
 const extractSass = new ExtractTextPlugin({
-  filename: 'main.css'
-})
+  filename: 'main.css',
+});
 
 module.exports = {
-  entry: ["./src/index.js"],
+  entry: ['./src/index.js'],
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "[name].js"
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
   },
   devServer: {
     contentBase: './dist',
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   module: {
     rules: [
@@ -24,27 +24,24 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader"
-          }
-        ]
+            loader: 'html-loader',
+          },
+        ],
       },
       {
         test: /\.sass$/,
         use: extractSass.extract({
-          use: [
-            { loader: "css-loader" },
-            { loader: "sass-loader" }
-          ]
-        })
-      }
-    ]
+          use: [{ loader: 'css-loader' }, { loader: 'sass-loader' }],
+        }),
+      },
+    ],
   },
   plugins: [
     // clean up dist folder
@@ -52,9 +49,9 @@ module.exports = {
     // create dynamic HTML file
     new HtmlWebpackPlugin({
       filename: './index.html',
-      template: './src/index.html'
+      template: './src/index.html',
     }),
     // sass files
-    extractSass
-  ]
-}
+    extractSass,
+  ],
+};
