@@ -15,7 +15,8 @@ module.exports = {
     filename: "[name].js"
   },
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
+    historyApiFallback: true
   },
   module: {
     rules: [
