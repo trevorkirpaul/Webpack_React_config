@@ -29,6 +29,18 @@ export default (state = defaultState, action) => {
         ...state,
         cats: state.cats.filter(cat => cat.id !== action.cat),
       };
+    case 'CAT:UPDATE:SUCCEED':
+      return {
+        ...state,
+        cats: state.cats.map(cat => {
+          if (cat.id === action.cat.id) {
+            cat.name = action.cat.name;
+            return cat;
+          } else {
+            return cat;
+          }
+        }),
+      };
     default:
       return state;
   }

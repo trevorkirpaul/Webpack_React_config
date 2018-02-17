@@ -4,6 +4,7 @@ import axios from 'axios';
 const API_GET = 'http://localhost:3001/cats';
 const API_POST = 'http://localhost:3001/cats';
 const API_DELETE = 'http://localhost:3001/cats';
+const API_PATCH = 'http://localhost:3001/cats';
 
 // getall saga : fired on CATS:FETCH_ALL
 function* fetchCats(action) {
@@ -41,6 +42,19 @@ function* deleteCat(action) {
   }
 }
 
+function* updateCat(action) {
+  try {
+    // api call
+    const cat = yield call(axios.patch, `${API_PATCH}/${action.id}`, {
+      name: action.name,
+    });
+    // if success
+    yield put({ type: 'CAT:UPDATE:SUCCEED', cat: cat.data });
+  } catch (e) {
+    yield put({ type: 'CAT:UPDATE:FAIL', error: e });
+  }
+}
+
 /*
   Starts fetchCats on each dispatched 'CATS:FETCH_ALL' action
   Allows concurrent fetches of user
@@ -56,6 +70,10 @@ export function* startCreateCat() {
 
 export function* startDeleteCat() {
   yield takeLatest('CAT:DELETE', deleteCat);
+}
+
+export function* startUpdateCat() {
+  yield takeLatest('CAT:UPDATE', updateCat);
 }
 
 /*

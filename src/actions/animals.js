@@ -19,3 +19,9 @@ export const deleteCat = id => ({
   type: 'CAT:DELETE',
   id,
 });
+
+export const updateCat = (id, name) => ({
+  type: 'CAT:UPDATE',
+  id,
+  name,
+});

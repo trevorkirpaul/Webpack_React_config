@@ -17,6 +17,11 @@ const Input = styled.input`
   padding: 5px 10px;
 `;
 
+const ListButtons = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
 const SubmitButton = styled.button`
   display: inline-block;
   padding: 5px 10px;
@@ -28,6 +33,17 @@ const SubmitButton = styled.button`
   &:hover {
     cursor: pointer;
   }
+`;
+
+const DeleteButton = SubmitButton.extend`
+  background: #b71c1c;
+  margin-right: 5px;
+`;
+
+const EditButton = SubmitButton.extend`
+  background: #ffc107;
+  color: #383838;
+  margin-right: 5px;
 `;
 
 const List = styled.ul`
@@ -47,7 +63,14 @@ const ListDetails = styled.div`
   margin-bottom: 15px;
 `;
 
-export default ({ handleOnChange, handleDelete, handleSubmit, name, cats }) => {
+export default ({
+  handleOnChange,
+  handleDelete,
+  handleSubmit,
+  name,
+  cats,
+  openModal,
+}) => {
   return (
     <Wrapper>
       <TitlePanel>
@@ -81,9 +104,14 @@ export default ({ handleOnChange, handleDelete, handleSubmit, name, cats }) => {
                 <SubTitle>{cat.name}</SubTitle>
                 <p>Created: {cat.created_at}</p>
               </ListDetails>
-              <SubmitButton onClick={() => handleDelete(cat.id)}>
-                Delete
-              </SubmitButton>
+              <ListButtons>
+                <DeleteButton onClick={() => handleDelete(cat.id)}>
+                  Delete
+                </DeleteButton>
+                <EditButton onClick={() => openModal(cat.name, cat.id)}>
+                  Edit
+                </EditButton>
+              </ListButtons>
             </ListItem>
           ))}
       </List>
