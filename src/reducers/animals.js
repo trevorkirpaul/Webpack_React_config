@@ -9,6 +9,11 @@ export default (state = defaultState, action) => {
         ...state,
         cats: [...state.cats, action.cat],
       };
+    case 'ANIMALS:FETCH_ALL:SUCCEED':
+      return {
+        ...state,
+        cats: action.cats,
+      };
     default:
       return state;
   }

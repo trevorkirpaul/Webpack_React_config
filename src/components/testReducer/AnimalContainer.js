@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createAnimal } from '../../actions/animals';
+import { getCats } from '../../actions/animals';
 import Cat from './Cat';
 
 export class AnimalContainer extends Component {
@@ -15,7 +15,7 @@ export class AnimalContainer extends Component {
     const { name, color } = this.state;
 
     if (name !== '' && color !== '') {
-      this.props.createAnimal(name, color);
+      // this.props.createAnimal(name, color);
       this.setState(() => ({ name: '', color: '' }));
     }
   };
@@ -24,6 +24,10 @@ export class AnimalContainer extends Component {
     const name = e.target.name;
     this.setState({ [name]: value });
   };
+  // lifecyle
+  componentDidMount() {
+    this.props.getCats();
+  }
   render() {
     return (
       <Cat
@@ -37,7 +41,7 @@ export class AnimalContainer extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  createAnimal: (name, color) => dispatch(createAnimal(name, color)),
+  getCats: () => dispatch(getCats()),
 });
 
 export default connect(null, mapDispatchToProps)(AnimalContainer);

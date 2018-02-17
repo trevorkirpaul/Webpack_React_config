@@ -5,3 +5,7 @@ export const createAnimal = (name, color) => ({
     color,
   },
 });
+
+export const getCats = () => ({
+  type: 'CATS:FETCH_ALL',
+});
