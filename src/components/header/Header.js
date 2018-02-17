@@ -1,13 +1,13 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 // STYLES
 const Wrapper = styled.nav`
   display: flex;
   margin: 10px;
   padding: 15px;
-`
+`;
 const Button = styled(Link)`
   text-decoration: none;
   background: #383838;
@@ -21,13 +21,14 @@ const Button = styled(Link)`
   }
 
   margin-right: 5px;
-`
+`;
 
 export default () => {
   return (
     <Wrapper>
       <Button to="/">Welcome</Button>
       <Button to="/snippets">Snippets</Button>
+      <Button to="/add-cat">Add Cat</Button>
     </Wrapper>
-  )
-}
+  );
+};

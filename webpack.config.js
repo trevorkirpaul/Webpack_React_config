@@ -14,6 +14,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
   },
+  devtool: 'incline-source-map',
   devServer: {
     contentBase: './dist',
     historyApiFallback: true,
