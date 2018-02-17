@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getCats, createCat } from '../../actions/animals';
+import { getCats, createCat, deleteCat } from '../../actions/animals';
 import Cat from './Cat';
 
 export class AnimalContainer extends Component {
@@ -18,6 +18,9 @@ export class AnimalContainer extends Component {
       this.props.createCat(name);
       this.setState(() => ({ name: '' }));
     }
+  };
+  handleDelete = id => {
+    this.props.deleteCat(id);
   };
   handleOnChange = e => {
     const value = e.target.value;
@@ -38,6 +41,7 @@ export class AnimalContainer extends Component {
     return (
       <Cat
         handleSubmit={this.handleSubmit}
+        handleDelete={this.handleDelete}
         handleOnChange={this.handleOnChange}
         name={this.state.name}
         cats={this.state.cats}
@@ -53,6 +57,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getCats: () => dispatch(getCats()),
   createCat: name => dispatch(createCat(name)),
+  deleteCat: id => dispatch(deleteCat(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnimalContainer);

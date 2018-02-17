@@ -24,6 +24,11 @@ export default (state = defaultState, action) => {
         ...state,
         error: action.error,
       };
+    case 'CAT:DELETE:SUCCEED':
+      return {
+        ...state,
+        cats: state.cats.filter(cat => cat.id !== action.cat),
+      };
     default:
       return state;
   }

@@ -14,3 +14,8 @@ export const createCat = name => ({
   type: 'CAT:CREATE',
   name,
 });
+
+export const deleteCat = id => ({
+  type: 'CAT:DELETE',
+  id,
+});

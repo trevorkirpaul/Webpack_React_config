@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const API_GET = 'http://localhost:3001/cats';
 const API_POST = 'http://localhost:3001/cats';
+const API_DELETE = 'http://localhost:3001/cats';
 
 // getall saga : fired on CATS:FETCH_ALL
 function* fetchCats(action) {
@@ -29,6 +30,17 @@ function* createCat(action) {
   }
 }
 
+function* deleteCat(action) {
+  try {
+    // api call
+    const cat = yield call(axios.delete, `${API_DELETE}/${action.id}`);
+    // if success
+    yield put({ type: 'CAT:DELETE:SUCCEED', cat: cat.data });
+  } catch (e) {
+    yield put({ type: 'CAT:DELETE:FAIL', error: e });
+  }
+}
+
 /*
   Starts fetchCats on each dispatched 'CATS:FETCH_ALL' action
   Allows concurrent fetches of user
@@ -40,6 +52,10 @@ export function* startFetchCats() {
 
 export function* startCreateCat() {
   yield takeEvery('CAT:CREATE', createCat);
+}
+
+export function* startDeleteCat() {
+  yield takeLatest('CAT:DELETE', deleteCat);
 }
 
 /*

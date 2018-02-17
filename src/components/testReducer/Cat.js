@@ -47,7 +47,7 @@ const ListDetails = styled.div`
   margin-bottom: 15px;
 `;
 
-export default ({ handleOnChange, handleSubmit, name, cats }) => {
+export default ({ handleOnChange, handleDelete, handleSubmit, name, cats }) => {
   return (
     <Wrapper>
       <TitlePanel>
@@ -81,7 +81,9 @@ export default ({ handleOnChange, handleSubmit, name, cats }) => {
                 <SubTitle>{cat.name}</SubTitle>
                 <p>Created: {cat.created_at}</p>
               </ListDetails>
-              <SubmitButton>Delete</SubmitButton>
+              <SubmitButton onClick={() => handleDelete(cat.id)}>
+                Delete
+              </SubmitButton>
             </ListItem>
           ))}
       </List>
