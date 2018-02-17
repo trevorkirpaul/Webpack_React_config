@@ -14,6 +14,16 @@ export default (state = defaultState, action) => {
         ...state,
         cats: action.cats,
       };
+    case 'CAT:CREATE:SUCCEED':
+      return {
+        ...state,
+        cats: [...state.cats, action.cat],
+      };
+    case 'CAT:CREATE:FAIL':
+      return {
+        ...state,
+        error: action.error,
+      };
     default:
       return state;
   }

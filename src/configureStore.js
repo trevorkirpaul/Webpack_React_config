@@ -1,7 +1,7 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import animals from './reducers/animals';
-import mySaga from './sagas/animals';
+import saga from './sagas/rootSaga';
 
 // create saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -17,7 +17,7 @@ export default () => {
     composeEnhancers(applyMiddleware(sagaMiddleware))
   );
   // run saga listener
-  sagaMiddleware.run(mySaga);
+  sagaMiddleware.run(saga);
   return store;
 };
 

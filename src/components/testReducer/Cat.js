@@ -5,6 +5,9 @@ import { Wrapper, TitlePanel, Title, SubTitle, Body } from '../welcome/Welcome';
 const FieldWrapper = styled.div`
   margin-bottom: 15px;
 `;
+const ActionWrapper = styled.div`
+  margin-bottom: 35px;
+`;
 const Input = styled.input`
   display: inline-block;
   border: none;
@@ -27,7 +30,24 @@ const SubmitButton = styled.button`
   }
 `;
 
-export default ({ handleOnChange, handleSubmit, name, color }) => {
+const List = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  flex-direction: column;
+`;
+const ListItem = styled.li`
+  margin: 10px;
+  padding: 25px;
+  background: #e8e8e8;
+  display: inline-block;
+`;
+const ListDetails = styled.div`
+  margin-bottom: 15px;
+`;
+
+export default ({ handleOnChange, handleSubmit, name, cats }) => {
   return (
     <Wrapper>
       <TitlePanel>
@@ -43,15 +63,28 @@ export default ({ handleOnChange, handleSubmit, name, color }) => {
           value={name}
           onChange={handleOnChange}
         />
-        <Input
-          type="text"
-          placeholder="Color"
-          name="color"
-          value={color}
-          onChange={handleOnChange}
-        />
       </FieldWrapper>
-      <SubmitButton onClick={handleSubmit}>Create Cat</SubmitButton>
+      <ActionWrapper>
+        <SubmitButton onClick={handleSubmit}>Create Cat</SubmitButton>
+      </ActionWrapper>
+
+      <TitlePanel>
+        <Title>All Cats</Title>
+        <SubTitle>A list of all cats</SubTitle>
+      </TitlePanel>
+
+      <List>
+        {cats &&
+          cats.map(cat => (
+            <ListItem key={cat.id}>
+              <ListDetails>
+                <SubTitle>{cat.name}</SubTitle>
+                <p>Created: {cat.created_at}</p>
+              </ListDetails>
+              <SubmitButton>Delete</SubmitButton>
+            </ListItem>
+          ))}
+      </List>
     </Wrapper>
   );
 };
